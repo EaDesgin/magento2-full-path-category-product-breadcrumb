@@ -1,0 +1,22 @@
+{
+    "name": "eadesigndev/module-fullbreadcrumbs",
+    "description": "",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "mihai.ardeleanu@eadesign.ro",
+            "name": "Mihai Ardeleanu"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Eadesigndev\\FullBreadcrumbs\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

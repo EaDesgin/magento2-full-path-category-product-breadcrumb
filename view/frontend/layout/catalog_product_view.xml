@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<css src="Eadesigndev_FullBreadcrumbs/css/replace_breadcrumbs.css"/>
+		<link src="Eadesigndev_FullBreadcrumbs/js/replace_breadcrumbs.js"/>
+	</head>
+	<body>
+		<referenceBlock name="page.main.title">
+			<block as="fullbreadcrumbs" class="Eadesigndev\FullBreadcrumbs\Block\FullBreadcrumbs" name="fullbreadcrumbs" template="Eadesigndev_FullBreadcrumbs::fullbreadcrumbs.phtml"/>
+		</referenceBlock>
+	</body>
+</page>
