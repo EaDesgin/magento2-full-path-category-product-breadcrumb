@@ -29,8 +29,7 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
         Registry $registry,
         CollectionFactory $categoryCollection,
         array $data = []
-    )
-    {
+    ) {
         $this->catalogData = $catalogData;
         $this->registry = $registry;
         $this->categoryCollection = $categoryCollection;
@@ -47,7 +46,8 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
         $collection = $this->categoryCollection->create();
         $filtered_colection = $collection
             ->addFieldToSelect('*')
-            ->addFieldToFilter('entity_id',
+            ->addFieldToFilter(
+                'entity_id',
                 ['in' => $categoryIds]
             )
             ->setOrder('level', 'ASC')
@@ -55,10 +55,10 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
 
         $categories = '';
         foreach ($filtered_colection as $categoriesData) {
-            $categories .= '<a href="' . $categoriesData->getUrl() . '">' . $categoriesData->getData('name') . '</a>' . $separator;
+            $categories .= '<a href="' . $categoriesData->getUrl() . '">';
+            $categories .= $categoriesData->getData('name') . '</a>' . $separator;
         }
         $home_url = '<a href="' . $this->_storeManager->getStore()->getBaseUrl() . '">Magazie</a>';
         return $home_url . $separator . $categories . '<span>' . $product->getName() . '</span>';
-
     }
 }
