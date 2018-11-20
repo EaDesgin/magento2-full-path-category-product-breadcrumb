@@ -17,8 +17,8 @@
                 </field>
                 <field id="bad_categories" translate="label comment" sortOrder="20" showInDefault="1" showInWebsite="1"
                        showInStore="1">
-                    <label>Categorii excluse</label>
-                    <comment>Se vor introduce id-urile categoriilor care vor fi excluse din Full Breadcrumbs. Ex:
+                    <label>Exluded categories</label>
+                    <comment>Enter the IDs of the categories that will be excluded from Full Breadcrumbs. ex:
                         4,12,15,14,78
                     </comment>
                 </field>
