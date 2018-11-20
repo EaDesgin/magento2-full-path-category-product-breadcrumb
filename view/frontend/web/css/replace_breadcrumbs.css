@@ -1,0 +1,34 @@
+.breadcrumbs a{
+    font-family: "Nunito", sans-serif;
+    color: #858585;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+}
+.breadcrumbs a:hover {
+    text-decoration: none;
+    color:#ffa100;
+}
+.breadcrumbs span {
+    font-family: "Nunito", sans-serif;
+    color: #858585;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+}
+.replacebreadcrumbs {
+    display: none;
+}
+span.breadcrumbsseparator {
+    margin: 0px 6px;
+    vertical-align: middle;
+    font-family: FontAwesome;
+    color: #858585;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+    padding-top: 3px;
+}
+.breadcrumbsseparator:before {
+    content: "\f0da";
+}
