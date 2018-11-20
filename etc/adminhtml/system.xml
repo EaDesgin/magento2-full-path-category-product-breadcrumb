@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="ea_fullbreadcrumbs" sortOrder="150" type="text" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <label>Full Breadcrumbs</label>
+            <tab>eadesign_extensions</tab>
+            <resource>Eadesigndev_FullBreadcrumbs::fullbreadcrumbs_configuration</resource>
+            <group id="fullbreadcrumbs" translate="label" sortOrder="10" type="text" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Full Breadcrumbs</label>
+                <field id="enabled" translate="label" sortOrder="10" type="select" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="bad_categories" translate="label comment" sortOrder="20" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Exluded categories</label>
+                    <comment>Enter the IDs of the categories that will be excluded from Full Breadcrumbs. ex:
+                        4,12,15,14,78
+                    </comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
