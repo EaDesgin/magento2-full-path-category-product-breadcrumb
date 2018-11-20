@@ -4,6 +4,8 @@ namespace Eadesigndev\FullBreadcrumbs\Block;
 use Magento\Catalog\Helper\Data;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
+use Magento\Framework\Registry;
+use Magento\Framework\Api\AttributeValue;
 
 class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
 {
@@ -12,17 +14,9 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
      *
      * @var Data
      */
-    protected $_catalogData = null;
+    protected $catalogData = null;
     private $registry;
     private $categoryCollection;
-
-    /**
-     * List of breadcrumbs
-     *
-     * @var array
-     */
-    protected $_crumbs;
-
 
     /**
      * @param Context $context
@@ -32,12 +26,12 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
     public function __construct(
         Context $context,
         Data $catalogData,
-        \Magento\Framework\Registry $registry,
+        Registry $registry,
         CollectionFactory $categoryCollection,
         array $data = []
     )
     {
-        $this->_catalogData = $catalogData;
+        $this->catalogData = $catalogData;
         $this->registry = $registry;
         $this->categoryCollection = $categoryCollection;
         parent::__construct($context, $data);
@@ -47,7 +41,7 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
     {
         $separator = ' <span class="breadcrumbsseparator"></span> ';
         $product = $this->registry->registry('current_product');
-        /** @var  $categoryIds  \Magento\Framework\Api\AttributeValue */
+        /** @var  $categoryIds  AttributeValue */
         $categoryIds = $product->getCustomAttribute('category_ids')->getValue();
 
         $collection = $this->categoryCollection->create();
@@ -67,5 +61,4 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
         return $home_url . $separator . $categories . '<span>' . $product->getName() . '</span>';
 
     }
-
 }
