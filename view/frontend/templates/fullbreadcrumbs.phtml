@@ -3,10 +3,6 @@
  * @var $block \Eadesigndev\FullBreadcrumbs\Block\FullBreadcrumbs
  */
 ?>
-<?php
-$bad_categories = $this->helper('Eadesigndev\FullBreadcrumbs\Helper\Data')->getConfig('ea_fullbreadcrumbs/fullbreadcrumbs/bad_categories');
-$enabled = $this->helper('Eadesigndev\FullBreadcrumbs\Helper\Data')->getConfig('ea_fullbreadcrumbs/fullbreadcrumbs/enabled');
-?>
 <div>
-    <span class="replacebreadcrumbs"><?= $block->getProductBreadcrumbs($bad_categories, $enabled); ?></span>
+    <span class="replacebreadcrumbs"><?= $block->getProductBreadcrumbs(); ?></span>
 </div>
