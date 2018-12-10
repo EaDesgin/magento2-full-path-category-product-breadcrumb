@@ -9,9 +9,6 @@ class Data extends AbstractHelper
 {
     const ENABLED = 'ea_fullbreadcrumbs/fullbreadcrumbs/enabled';
 
-    /**
-     * @var ScopeConfigInterface
-     */
     public $config;
 
     /**
@@ -29,7 +26,7 @@ class Data extends AbstractHelper
      * @param string $configPath
      * @return bool
      */
-    public function getConfig($configPath)
+    public function hasConfig($configPath)
     {
         return $this->config->getValue(
             $configPath,
@@ -39,6 +36,6 @@ class Data extends AbstractHelper
 
     public function isEnabled($enablefullbreadcrumbs = self::ENABLED)
     {
-        return $this->getConfig($enablefullbreadcrumbs);
+        return $this->hasConfig($enablefullbreadcrumbs);
     }
 }
