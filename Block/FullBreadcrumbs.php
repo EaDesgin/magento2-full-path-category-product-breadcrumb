@@ -6,6 +6,7 @@ use Magento\Framework\View\Element\Template\Context;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
 use Magento\Framework\Registry;
 use Magento\Framework\Api\AttributeValue;
+use Eadesigndev\FullBreadcrumbs\Helper\BreadcrumbsData;
 
 class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
 {
@@ -17,6 +18,9 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
     protected $catalogData = null;
     private $registry;
     private $categoryCollection;
+    private $breadcrumbsData;
+    public  $bad_categories;
+    public  $enabled;
 
     /**
      * @param Context $context
@@ -27,17 +31,22 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
         Context $context,
         Data $catalogData,
         Registry $registry,
+        BreadcrumbsData $breadcrumbsData,
         CollectionFactory $categoryCollection,
         array $data = []
     ) {
         $this->catalogData = $catalogData;
         $this->registry = $registry;
+        $this->breadcrumbsData = $breadcrumbsData;
         $this->categoryCollection = $categoryCollection;
         parent::__construct($context, $data);
     }
 
-    public function getProductBreadcrumbs($bad_categories, $enabled)
+    public function getProductBreadcrumbs()
     {
+        $bad_categories = $this->breadcrumbsData->getConfig('ea_fullbreadcrumbs/fullbreadcrumbs/bad_categories');
+        $enabled = $this->breadcrumbsData->getConfig('ea_fullbreadcrumbs/fullbreadcrumbs/enabled');
+
         if ($enabled) {
             $bad_categories_array = explode(',', str_replace(' ', '', $bad_categories));
             $separator = ' <span class="breadcrumbsseparator"></span> ';
