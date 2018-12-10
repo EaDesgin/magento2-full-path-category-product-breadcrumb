@@ -52,10 +52,11 @@ jobs:
 
     - run:
         name: Quality verifications code sniffer
-        command: php magento-coding-standard/vendor/bin/phpcs --standard=dev/tests/static/framework/Magento/ruleset.xml app/code/Eadesigndev/FullBreadcrumbs/Api/ app/code/Eadesigndev/FullBreadcrumbs/Block/ app/code/Eadesigndev/FullBreadcrumbs/Helper/ app/code/Eadesigndev/FullBreadcrumbs/view/
+        command: php magento-coding-standard/vendor/bin/phpcs --standard= magento-coding-standard/MEQP2/ruleset.xml  app/code/Eadesigndev/FullBreadcrumbs/Block/ app/code/Eadesigndev/FullBreadcrumbs/Helper/ app/code/Eadesigndev/FullBreadcrumbs/view/
+
     - run:
         name: Quality verifications mess dedector
-        command: php vendor/bin/phpmd app/code/Eadesigndev/FullBreadcrumbs/Api/,app/code/Eadesigndev/FullBreadcrumbs/Block/,app/code/Eadesigndev/Pdfgenerator/Helper/,app/code/Eadesigndev/FullBreadcrumbs/view/ text  dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
+        command: php vendor/bin/phpmd app/code/Eadesigndev/FullBreadcrumbs/Block/,app/code/Eadesigndev/FullBreadcrumbs/Helper/,app/code/Eadesigndev/FullBreadcrumbs/view/ text  dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
 
 #    - run:
 #        name: Run unit tests
