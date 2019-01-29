@@ -10,7 +10,7 @@ use Magento\Framework\View\Element\Template\Context;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
 use Magento\Framework\Registry;
 use Magento\Framework\Api\AttributeValue;
-use Eadesigndev\FullBreadcrumbs\Helper\BreadcrumbsData;
+use Eadesigndev\FullBreadcrumbs\Helper\Data as BreadcrumbsData;
 
 class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
 {
@@ -75,7 +75,7 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
                     $categories .= $categoriesData->getData('name') . '</a>' . $separator;
                 }
             }
-            $home_url = '<a href="' . $this->_storeManager->getStore()->getBaseUrl() . '">Magazie</a>';
+            $home_url = '<a href="' . $this->_storeManager->getStore()->getBaseUrl() . '">Home</a>';
             return $home_url . $separator . $categories . '<span>' . $product->getName() . '</span>';
         }
     }
