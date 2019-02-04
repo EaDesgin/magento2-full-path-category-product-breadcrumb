@@ -30,7 +30,7 @@ class Data extends AbstractHelper
      * @param string $configPath
      * @return bool
      */
-    public function getConfig($configPath)
+    public function hasConfig($configPath)
     {
         return $this->config->getValue(
             $configPath,
