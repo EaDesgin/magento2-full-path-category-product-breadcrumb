@@ -63,7 +63,7 @@ jobs:
 
     - run:
         name: Quality verifications code sniffer
-        command: php magento-coding-standard/vendor/bin/phpcs --standard= magento-coding-standard/MEQP2/ruleset.xml  app/code/Eadesigndev/FullBreadcrumbs/Block/ app/code/Eadesigndev/FullBreadcrumbs/Helper/ app/code/Eadesigndev/FullBreadcrumbs/view/
+        command: php magento-coding-standard/vendor/bin/phpcs --standard=magento-coding-standard/MEQP2/ruleset.xml  app/code/Eadesigndev/FullBreadcrumbs/Block/ app/code/Eadesigndev/FullBreadcrumbs/Helper/ app/code/Eadesigndev/FullBreadcrumbs/view/
 
     - run:
         name: Quality verifications mess dedector
