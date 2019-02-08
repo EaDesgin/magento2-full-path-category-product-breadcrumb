@@ -1,5 +1,5 @@
 
-# # Magento 2 Full path categories product breadcrumb [![CircleCI](https://circleci.com/gh/EaDesgin/magento2-full-path-category-product-breadcrumb.svg?style=svg)](https://circleci.com/gh/EaDesgin/magento2-full-path-category-product-breadcrumb)
+# Magento 2 Full path categories product breadcrumb [![CircleCI](https://circleci.com/gh/EaDesgin/magento2-full-path-category-product-breadcrumb.svg?style=svg)](https://circleci.com/gh/EaDesgin/magento2-full-path-category-product-breadcrumb)
 
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/a0e292336dc421b6c903/maintainability)](https://codeclimate.com/github/EaDesgin/magento2-full-path-category-product-breadcrumb/maintainability)
