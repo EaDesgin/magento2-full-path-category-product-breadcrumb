@@ -3,86 +3,42 @@ version: 2
 jobs:
   build:
     docker:
-    - image: circleci/php:7.1-node-browsers
+    - image: circleci/php:7.2
+
+    environment:
+        MODULE_DIR: app/code/Eadesigndev/FullBreadcrumbs
 
     working_directory: ~/magento
 
     steps:
     - run:
-        name: Install libpng-dev for gd
-        command: sudo apt-get install -y libpng-dev
+          name: Setup test environment
+          command: |
+              sudo apt-get install -y libpng-dev
+              sudo docker-php-ext-install gd
+              sudo docker-php-ext-install bcmath
+              sudo apt-get install -y libxslt-dev
+              sudo docker-php-ext-install xsl
+              sudo docker-php-ext-install pdo_mysql
+              sudo docker-php-ext-install soap
     - run:
-        name: Install PHP gd extension
-        command: sudo docker-php-ext-install gd
-    - run:
-        name: Install PHP bcmath extension
-        command: sudo docker-php-ext-install bcmath
-    - run:
-        name: Install libmcrypt-dev for mycript
-        command: sudo apt-get install -y libmcrypt-dev
-    - run:
-        name: Install PHP mcrypt extension
-        command: sudo docker-php-ext-install mcrypt
-    - run:
-        name: Install libxslt-dev for xsl
-        command: sudo apt-get install -y libxslt-dev
-    - run:
-        name: Install PHP xsl extension
-        command: sudo docker-php-ext-install xsl
-    - run:
-        name: Install PHP pdo_mysql extension
-        command: sudo docker-php-ext-install pdo_mysql
-    - run:
-        name: Install PHP soap extension
-        command: sudo docker-php-ext-install soap
-    - run:
-        name: Self update composer
-        command: sudo composer self-update
-    - run:
-        name: Create composer folder and authentication json
-        command: mkdir ~/.composer && touch ~/.composer/auth.json
-    - run:
-        name: Add Magento Api keys to composer auth
-        command: echo "{\"http-basic\":{\"repo.magento.com\":{\"username\":\"${MAGENTO_KEY}\",\"password\":\"${MAGENTO_SECRET}\"}}}" > ~/.composer/auth.json
-    - run:
-        name: Create Magento 2.3 project
-        command: composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition . 2.3.0
-    - run:
-        name: Add Eacore to composer
-        command: composer require eadesignro/module-eacore
-    - run:
-        name: Create module folder
-        command: mkdir -p app/code/Eadesigndev/FullBreadcrumbs
+          name: Setup composer details
+          command: |
+              sudo composer self-update
+              mkdir ~/.composer
+              touch ~/.composer/auth.json
+              echo "{\"http-basic\":{\"repo.magento.com\":{\"username\":\"${MAGENTO_KEY}\",\"password\":\"${MAGENTO_SECRET}\"}}}" > ~/.composer/auth.json
+              composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition . 2.3.0
+              composer require eadesignro/module-eacore
+              mkdir -p app/code/Eadesigndev/FullBreadcrumbs
 
     - checkout:
         path: app/code/Eadesigndev/FullBreadcrumbs
 
     - run:
-        name: Install marketplace qulity tools
-        command: composer create-project --repository=https://repo.magento.com magento/marketplace-eqp magento-coding-standard
-
-    - run:
-        name: Quality verifications code sniffer
-        command: php magento-coding-standard/vendor/bin/phpcs --standard=magento-coding-standard/MEQP2/ruleset.xml  app/code/Eadesigndev/FullBreadcrumbs/Block/ app/code/Eadesigndev/FullBreadcrumbs/Helper/ app/code/Eadesigndev/FullBreadcrumbs/view/
-
-    - run:
-        name: Quality verifications mess dedector
-        command: php vendor/bin/phpmd app/code/Eadesigndev/FullBreadcrumbs/Block/,app/code/Eadesigndev/FullBreadcrumbs/Helper/,app/code/Eadesigndev/FullBreadcrumbs/view/ text  dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
-
-#    - run:
-#        name: Run unit tests
-#        command: php vendor/bin/phpunit app/code/Eadesigndev/Pdfgenerator/Test/ --config dev/tests/unit/phpunit.xml.dist --coverage-clover=app/code/Eadesigndev/Pdfgenerator/build/logs/clover.xml
-
-#    - run:
-#        name: Get the reporter script
-#        command: cd app/code/Eadesigndev/Pdfgenerator && curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-#    - run:
-#        name: Make the executable
-#        command: cd app/code/Eadesigndev/Pdfgenerator && chmod +x ./cc-test-reporter
-#    - run:
-#        name: Run the before script
-#        command: cd app/code/Eadesigndev/Pdfgenerator && ./cc-test-reporter before-build
-#    - run:
-#        name: Rune the reporter
-#        command: cd app/code/Eadesigndev/Pdfgenerator && ./cc-test-reporter after-build -r $CC_TEST_REPORTER_ID --coverage-input-type clover --exit-code $?
-
+        name: Install marketplace quality tools
+        command: |
+                composer create-project --repository=https://repo.magento.com magento/marketplace-eqp magento-coding-standard
+                php magento-coding-standard/vendor/bin/phpcs --standard=magento-coding-standard/MEQP2/ruleset.xml  app/code/Eadesigndev/FullBreadcrumbs/Block/ app/code/Eadesigndev/FullBreadcrumbs/Helper/ app/code/Eadesigndev/FullBreadcrumbs/view/
+                php vendor/bin/phpmd app/code/Eadesigndev/FullBreadcrumbs/Block/,app/code/Eadesigndev/FullBreadcrumbs/Helper/,app/code/Eadesigndev/FullBreadcrumbs/view/ text  dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
+                php vendor/bin/phpunit app/code/Eadesigndev/Pdfgenerator/Test/ --config dev/tests/unit/phpunit.xml.dist
