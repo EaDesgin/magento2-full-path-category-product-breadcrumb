@@ -46,10 +46,24 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
         parent::__construct($context, $data);
     }
 
+    public function getBadCategories()
+    {
+        return $this->breadcrumbsData->hasConfig('ea_fullbreadcrumbs/fullbreadcrumbs/bad_categories');
+    }
+
+    public function isEnable()
+    {
+        return $this->breadcrumbsData->hasConfig('ea_fullbreadcrumbs/fullbreadcrumbs/enabled');
+    }
+
+
+
+
+
     public function getProductBreadcrumbs()
     {
-        $bad_categories = $this->breadcrumbsData->hasConfig('ea_fullbreadcrumbs/fullbreadcrumbs/bad_categories');
-        $enabled = $this->breadcrumbsData->hasConfig('ea_fullbreadcrumbs/fullbreadcrumbs/enabled');
+        $bad_categories = $this->getBadCategories();
+        $enabled = $this->isEnable();
 
         if ($enabled) {
             $bad_categories_array = explode(',', str_replace(' ', '', $bad_categories));
