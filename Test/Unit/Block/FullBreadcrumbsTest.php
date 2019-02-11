@@ -42,8 +42,6 @@ class FullBreadcrumbsTest extends TestCase
 
     public function testGetProductBreadcrumbs()
     {
-
-
         $this->assertTrue(true);
     }
 }

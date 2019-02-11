@@ -25,10 +25,17 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
     private $breadcrumbsData;
     public $bad_categories;
     public $enabled;
+    /**
+     * @var Context
+     */
+    private $context;
 
     /**
      * @param Context $context
      * @param Data $catalogData
+     * @param Registry $registry
+     * @param BreadcrumbsData $breadcrumbsData
+     * @param CollectionFactory $categoryCollection
      * @param array $data
      */
     public function __construct(
@@ -44,6 +51,7 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
         $this->breadcrumbsData = $breadcrumbsData;
         $this->categoryCollection = $categoryCollection;
         parent::__construct($context, $data);
+        $this->context = $context;
     }
 
     public function getBadCategories()
@@ -55,10 +63,6 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
     {
         return $this->breadcrumbsData->hasConfig('ea_fullbreadcrumbs/fullbreadcrumbs/enabled');
     }
-
-
-
-
 
     public function getProductBreadcrumbs()
     {
