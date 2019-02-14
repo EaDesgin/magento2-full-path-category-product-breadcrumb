@@ -12,7 +12,8 @@
 	</head>
 	<body>
 		<referenceBlock name="page.main.title">
-			<block as="fullbreadcrumbs" class="Eadesigndev\FullBreadcrumbs\Block\FullBreadcrumbs" name="fullbreadcrumbs" template="Eadesigndev_FullBreadcrumbs::fullbreadcrumbs.phtml"/>
+			<block as="fullbreadcrumbs"  class="Eadesigndev\FullBreadcrumbs\Block\FullBreadcrumbs" name="fullbreadcrumbs" template="Eadesigndev_FullBreadcrumbs::fullbreadcrumbs.phtml"/>
 		</referenceBlock>
+		<move element="fullbreadcrumbs" destination="page.main.title" before="page.main.title" />
 	</body>
 </page>
