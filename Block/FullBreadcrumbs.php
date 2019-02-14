@@ -46,35 +46,69 @@ class FullBreadcrumbs extends \Magento\Framework\View\Element\Template
         parent::__construct($context, $data);
     }
 
-    public function getProductBreadcrumbs()
+    public function getBadCategories()
     {
         $bad_categories = $this->breadcrumbsData->hasConfig('ea_fullbreadcrumbs/fullbreadcrumbs/bad_categories');
-        $enabled = $this->breadcrumbsData->hasConfig('ea_fullbreadcrumbs/fullbreadcrumbs/enabled');
+        return explode(',', str_replace(' ', '', $bad_categories));
+    }
 
-        if ($enabled) {
-            $bad_categories_array = explode(',', str_replace(' ', '', $bad_categories));
-            $separator = ' <span class="breadcrumbsseparator"></span> ';
-            $product = $this->registry->registry('current_product');
-            /** @var  $categoryIds  AttributeValue */
-            $categoryIds = $product->getCustomAttribute('category_ids')->getValue();
+    public function isEnable()
+    {
+        return $this->breadcrumbsData->hasConfig('ea_fullbreadcrumbs/fullbreadcrumbs/enabled');
+    }
 
-            $collection = $this->categoryCollection->create();
-            $filtered_colection = $collection
-                ->addFieldToSelect('*')
-                ->addFieldToFilter(
-                    'entity_id',
-                    ['in' => $categoryIds]
-                )
-                ->setOrder('level', 'ASC')
-                ->load();
+    public function getProduct()
+    {
+        return $this->registry->registry('current_product');
+    }
 
-            $categories = '';
-            foreach ($filtered_colection as $categoriesData) {
-                if (!in_array($categoriesData->getId(), $bad_categories_array)) {
-                    $categories .= '<a href="' . $categoriesData->getUrl() . '">';
-                    $categories .= $categoriesData->getData('name') . '</a>' . $separator;
-                }
+    public function getCategoryProductIds($product)
+    {
+        /** @var  $categoryIds  AttributeValue */
+        $categoryIds = $product->getCategoryIds();
+        return $categoryIds;
+    }
+
+    public function getFilteredCollection($categoryIds)
+    {
+        $collection = $this->categoryCollection->create();
+        $filtered_colection = $collection
+            ->addFieldToSelect('*')
+            ->addFieldToFilter(
+                'entity_id',
+                ['in' => $categoryIds]
+            )
+            ->setOrder('level', 'ASC')
+            ->load();
+        return $filtered_colection;
+    }
+
+    public function getCategories($filtered_colection, $badCategories)
+    {
+        $separator = ' <span class="breadcrumbsseparator"></span> ';
+        $categories = '';
+        foreach ($filtered_colection as $categoriesData) {
+            if (!in_array($categoriesData->getId(), $badCategories)) {
+                $categories .= '<a href="' . $categoriesData->getUrl() . '">';
+                $categories .= $categoriesData->getData('name') . '</a>' . $separator;
             }
+        }
+        return $categories;
+    }
+
+    public function getProductBreadcrumbs()
+    {
+        if ($this->isEnable()) {
+            $separator = ' <span class="breadcrumbsseparator"></span> ';
+            $product = $this->getProduct();
+            $categoryIds = $this->getCategoryProductIds($product);
+
+            $filtered_colection = $this->getFilteredCollection($categoryIds);
+
+            $badCategories = $this->getBadCategories();
+
+            $categories = $this->getCategories($filtered_colection, $badCategories);
+
             $home_url = '<a href="' . $this->_storeManager->getStore()->getBaseUrl() . '">Home</a>';
             return $home_url . $separator . $categories . '<span>' . $product->getName() . '</span>';
         }
