@@ -1,6 +1,8 @@
 
 # Magento 2 Full path categories product breadcrumb [![CircleCI](https://circleci.com/gh/EaDesgin/magento2-full-path-category-product-breadcrumb.svg?style=svg)](https://circleci.com/gh/EaDesgin/magento2-full-path-category-product-breadcrumb)
 
+[![](https://img.shields.io/packagist/v/eadesigndev/module-fullbreadcrumbs.svg)](https://packagist.org/packages/eadesigndev/module-fullbreadcrumbs) [![](https://img.shields.io/packagist/dt/eadesigndev/module-fullbreadcrumbs.svg)](https://packagist.org/packages/eadesigndev/module-fullbreadcrumbs)
+
 
 Full path categories product breadcrumb for Magento 2 was created to include breadcrumbs with product categories in product view page, when product is acccesed from product url.
 
